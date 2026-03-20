@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyFinder — Detect the Key of Any Music</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-symbol">♩</span>
+      <span class="logo-text">KeyFinder</span>
+    </div>
+    <p class="tagline">Drop a melody. Discover its key.</p>
+  </header>
+
+  <main>
+
+    <!-- Recording Section -->
+    <section class="card" id="recorder-card">
+      <div class="card-label">Record Audio</div>
+
+      <div class="waveform-display" id="waveform">
+        <div class="bars-container" id="bars"></div>
+      </div>
+        <div class="idle-prompt" id="idle-prompt">
+          <span>press record to begin</span>
+        </div>
+      
+
+      <div class="timer" id="timer">0:00 <span class="timer-max">/ 0:20</span></div>
+
+      <div class="controls">
+        <button class="btn btn-record" id="recordBtn">
+          <span class="btn-icon" id="recordIcon">●</span>
+          <span id="recordLabel">Record</span>
+        </button>
+        <button class="btn btn-secondary" id="analyzeBtn" disabled>
+          Analyze Key
+        </button>
+        <button class="btn btn-ghost" id="resetBtn" disabled>
+          Reset
+        </button>
+      </div>
+
+      <div class="upload-divider"><span>or upload a file</span></div>
+
+      <label class="upload-zone" id="uploadZone" for="fileInput">
+        <span class="upload-icon">↑</span>
+        <span class="upload-text">Drop an audio file here</span>
+        <span class="upload-sub">MP3, WAV, OGG — max 20 seconds</span>
+        <input type="file" id="fileInput" accept="audio/*" hidden />
+      </label>
+    </section>
+
+    <!-- Result Section -->
+    <section class="card result-card" id="resultCard" aria-live="polite">
+      <div class="card-label">Result</div>
+
+      <div class="result-idle" id="resultIdle">
+        <p>Your key will appear here</p>
+      </div>
+
+      <div class="result-loading" id="resultLoading" hidden>
+        <div class="spinner"></div>
+        <p>Analyzing pitch...</p>
+      </div>
+
+      <div class="result-output" id="resultOutput" hidden>
+        <div class="key-display">
+          <div class="key-main" id="keyMain">—</div>
+          <div class="key-mode" id="keyMode"></div>
+        </div>
+        <div class="key-meta">
+          <div class="meta-row">
+            <span class="meta-label">Relative</span>
+            <span class="meta-value" id="relativeKey">—</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Notes in key</span>
+            <span class="meta-value" id="keyNotes">—</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Confidence</span>
+            <span class="meta-value" id="confidence">—</span>
+          </div>
+        </div>
+        <div class="circle-wrap">
+          <canvas id="circleCanvas" width="180" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="result-error" id="resultError" hidden>
+        <p id="errorMsg">Something went wrong. Please try again.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>KeyFinder uses the Web Audio API &amp; chromagram analysis to detect musical keys.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
