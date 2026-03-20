@@ -170,7 +170,7 @@ async function startRecording() {
 
   startTimer();
   startWaveformAnimation(analyserNode);
-  showResultIdle();
+//   showResultIdle();
 }
 
 function stopRecording() {
